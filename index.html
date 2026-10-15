@@ -16,13 +16,13 @@
 /* Lake Erie sunrise: deep lake teal, sunrise coral, beach sand. One column, stages as stops on a shoreline path. */
 :root {
   --lake: #0f3b4c; --lake-2: #1d5a6e; --sun: #ff8a65; --sun-2: #ffb38a; --sand: #fbf6ee; --card: #ffffff;
-  --ink: #1d2a30; --muted: #5f6f76; --line: #e8e1d5; --ok: #2e8b62; --craig: #2f6db5; --mason: #8a4fbf; --together: #d0612f;
+  --ink: #1d2a30; --muted: #5f6f76; --line: #e8e1d5; --ok: #2e8b62; --craig: #2f6db5; --mason: #8a4fbf; --together: #d0612f; --sutton: #f2b705; --why-bg: #fff3e8;
   --display: "Young Serif", Georgia, serif; --body: "Figtree", system-ui, -apple-system, sans-serif;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) { :root {
   --sand: #0e171b; --card: #16232a; --ink: #eef2f1; --muted: #9fb0b6; --line: #24343c; --lake-2: #2b7690;
-  --ok: #5fcf9a; --craig: #7fb0ee; --mason: #c39af0; --together: #ff9e72; color-scheme: dark } }
+  --ok: #5fcf9a; --craig: #7fb0ee; --mason: #c39af0; --together: #ff9e72; --sutton: #ffd166; --why-bg: #2a2220; color-scheme: dark } }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
 body { background: var(--sand); color: var(--ink); font: 16px/1.5 var(--body); -webkit-font-smoothing: antialiased; }
@@ -84,7 +84,19 @@ header.hero { background: linear-gradient(180deg, var(--lake) 0%, var(--lake-2) 
 .detail { color: var(--muted); font-size: 14px; margin-top: 2px; }
 .meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 6px; }
 .tag { font-size: 12px; font-weight: 800; padding: 2px 9px; border-radius: 999px; color: #fff; }
-.tag.Craig { background: var(--craig); } .tag.Mason { background: var(--mason); } .tag.Together { background: var(--together); }
+.tag.Craig { background: var(--craig); } .tag.Mason { background: var(--mason); } .tag.Together { background: var(--together); } .tag.Sutton { background: var(--sutton); color: #3a2a00; }
+/* Our why */
+.why { margin-top: 14px; background: var(--why-bg); border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px; }
+.why h2 { margin: 0 0 8px; font-family: var(--display); font-weight: 400; font-size: 22px; }
+.reasons { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.reasons li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; font-weight: 600; line-height: 1.35; }
+.heart { width: 18px; height: 18px; margin-top: 2px; fill: var(--sun); }
+.mine-why { display: grid; gap: 10px; margin-top: 14px; }
+.mine-why label { font-weight: 800; font-size: 14px; display: flex; gap: 6px; align-items: center; }
+.mine-why .hint { font-weight: 500; color: var(--muted); font-size: 13px; }
+.mine-why textarea { margin-left: 0; width: 100%; background: var(--card); }
+.whyline { position: relative; margin-top: 12px; font-style: italic; max-width: 34ch; opacity: .95; min-height: 3em; transition: opacity .4s; }
+.whyline.fade { opacity: 0; }
 .phone { font-size: 13px; font-weight: 800; color: var(--lake-2); text-decoration: none; border: 1.5px solid currentColor; border-radius: 999px; padding: 1px 9px; }
 @media (prefers-color-scheme: dark) { .phone { color: #7fd0e6; } }
 .by { font-size: 12px; color: var(--ok); font-weight: 700; }
@@ -130,10 +142,12 @@ canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 20; 
         <div class="who" role="group" aria-label="Who is using this">
           <button type="button" data-who="Craig" aria-pressed="false">Craig</button>
           <button type="button" data-who="Mason" aria-pressed="false">Mason</button>
+          <button type="button" data-who="Sutton" aria-pressed="false">Sutton</button>
         </div>
       </div>
       <h1 id="greet">Our adoption journey</h1>
       <p>One kid a little older than Sutton, and a home full of people who love them.</p>
+      <p class="whyline" id="whyLine" aria-live="polite"></p>
     </div>
     <div class="waves" aria-hidden="true"></div>
   </header>
@@ -152,11 +166,18 @@ canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 20; 
       </div>
     </section>
 
+    <section class="why" aria-labelledby="whyTitle">
+      <h2 id="whyTitle">Why we're doing this</h2>
+      <ul class="reasons" id="reasons"></ul>
+      <div class="mine-why" id="mineWhy"></div>
+    </section>
+
     <nav class="chips" aria-label="Show tasks for">
       <button type="button" data-f="all" aria-pressed="true">Everything</button>
       <button type="button" data-f="mine" aria-pressed="false">Just mine</button>
       <button type="button" data-f="Craig" aria-pressed="false">Craig</button>
       <button type="button" data-f="Mason" aria-pressed="false">Mason</button>
+      <button type="button" data-f="Sutton" aria-pressed="false">Sutton</button>
       <button type="button" data-f="Together" aria-pressed="false">Together</button>
       <button type="button" data-f="open" aria-pressed="false">Not done yet</button>
     </nav>
@@ -210,7 +231,7 @@ document.getElementById("lockForm").addEventListener("submit", async e => {
 document.getElementById("lockBtn").addEventListener("click", () => { store.del("journey-code"); location.reload(); });
 
 function showLock() { document.getElementById("lock").hidden = false; document.getElementById("app").hidden = true; setTimeout(() => document.getElementById("code").focus(), 50); }
-function showApp() { document.getElementById("lock").hidden = true; document.getElementById("app").hidden = false; render(); }
+function showApp() { document.getElementById("lock").hidden = true; document.getElementById("app").hidden = false; whyI = Math.floor(Math.random() * 50); render(); rotateWhy(true); }
 
 // Who + filters
 document.querySelectorAll(".who button").forEach(b => b.addEventListener("click", () => { who = b.dataset.who; store.set("journey-who", who); render(); }));
@@ -228,23 +249,25 @@ function render() {
   document.querySelectorAll(".chips button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.f === filter)));
   document.getElementById("greet").textContent = who ? `Hi ${who}, here's where we are` : "Our adoption journey";
 
-  const total = tasks.length, done = tasks.filter(t => t.done).length, pct = total ? Math.round(100 * done / total) : 0;
+  const steps = tasks.filter(t => t.kind !== "why");
+  const total = steps.length, done = steps.filter(t => t.done).length, pct = total ? Math.round(100 * done / total) : 0;
   document.getElementById("ringFg").style.strokeDashoffset = String(201.06 * (1 - pct / 100));
   document.getElementById("ringText").textContent = pct + "%";
-  const stages = [...new Map(tasks.map(t => [t.stage, t.stage_title])).entries()];
-  const current = stages.find(([s]) => tasks.some(t => t.stage === s && !t.done));
+  const stages = [...new Map(steps.map(t => [t.stage, t.stage_title])).entries()];
+  const current = stages.find(([s]) => steps.some(t => t.stage === s && !t.done));
   document.getElementById("doneLine").textContent = current ? `Stop ${current[0]}: ${current[1]}` : "Every step done!";
   document.getElementById("subLine").textContent = `${done} of ${total} steps done`;
-  const mineNext = tasks.find(t => !t.done && (!who || t.owner === who || t.owner === "Together"));
+  const mineNext = steps.find(t => !t.done && (!who || t.owner === who || t.owner === "Together"));
   document.getElementById("nextLine").innerHTML = "";
   if (mineNext) { const b = document.createElement("b"); b.textContent = "Up next: "; document.getElementById("nextLine").append(b, mineNext.title); }
 
   const path = document.getElementById("path");
   const focused = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.id : null;
   if (focused) return; // don't rebuild while someone is typing
+  renderWhy();
   path.innerHTML = "";
   for (const [s, title] of stages) {
-    const all = tasks.filter(t => t.stage === s), shown = all.filter(visible);
+    const all = steps.filter(t => t.stage === s), shown = all.filter(visible);
     const sd = all.filter(t => t.done).length;
     const d = document.createElement("details");
     d.className = "stage" + (sd === all.length ? " done" : "") + (current && current[0] === s ? " current" : "");
@@ -261,6 +284,41 @@ function render() {
     path.append(d);
   }
 }
+
+const HEART = '<svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6-8 11-8 11z"/></svg>';
+function whyPool() {
+  const whys = tasks.filter(t => t.kind === "why");
+  const pool = whys.filter(t => !t.detail).map(t => t.title);
+  for (const t of whys) if (t.detail && t.note && t.note.trim()) pool.push(`${t.owner}: “${t.note.trim()}”`);
+  return pool.length ? pool : ["Every step is one step closer to bringing them home."];
+}
+function renderWhy() {
+  const whys = tasks.filter(t => t.kind === "why");
+  const ul = document.getElementById("reasons"); ul.innerHTML = "";
+  for (const t of whys.filter(t => !t.detail)) { const li = document.createElement("li"); li.innerHTML = HEART + "<span></span>"; li.querySelector("span").textContent = t.title; ul.append(li); }
+  const box = document.getElementById("mineWhy"); box.innerHTML = "";
+  for (const t of whys.filter(t => t.detail)) {
+    const wrap = document.createElement("div");
+    wrap.innerHTML = `<label><span class="tag"></span><span class="hint"></span></label><textarea rows="2"></textarea>`;
+    const tag = wrap.querySelector(".tag"); tag.textContent = t.title; tag.classList.add(t.owner);
+    wrap.querySelector(".hint").textContent = t.detail;
+    const ta = wrap.querySelector("textarea"); ta.value = t.note || ""; ta.id = "why-" + t.id; ta.dataset.id = t.id;
+    ta.placeholder = t.owner === "Sutton" ? "What did Sutton say?" : "Because...";
+    wrap.querySelector("label").htmlFor = ta.id;
+    let timer;
+    ta.addEventListener("input", () => { clearTimeout(timer); timer = setTimeout(() => save(t.id, { note: ta.value }), 800); });
+    ta.addEventListener("blur", () => { clearTimeout(timer); if (ta.value !== (find(t.id).note || "")) save(t.id, { note: ta.value }); setTimeout(render, 0); });
+    box.append(wrap);
+  }
+}
+let whyI = 0;
+function rotateWhy(now) {
+  const el = document.getElementById("whyLine"), pool = whyPool();
+  const set = () => { el.textContent = pool[whyI % pool.length]; el.classList.remove("fade"); };
+  if (now || matchMedia("(prefers-reduced-motion: reduce)").matches) { set(); return; }
+  el.classList.add("fade"); setTimeout(set, 400);
+}
+setInterval(() => { if (!document.getElementById("app").hidden) { whyI++; rotateWhy(); } }, 9000);
 
 function taskEl(t) {
   const li = document.createElement("li");
@@ -280,7 +338,11 @@ function taskEl(t) {
   ta.addEventListener("input", () => { grow(); clearTimeout(timer); timer = setTimeout(() => save(t.id, { note: ta.value }), 800); });
   ta.addEventListener("blur", () => { clearTimeout(timer); if (ta.value !== (find(t.id).note || "")) save(t.id, { note: ta.value }); setTimeout(render, 0); });
   cb.addEventListener("change", e => {
-    if (cb.checked) { if (!who) toast("Tap Craig or Mason up top so we know who did it"); celebrate(cb); }
+    if (cb.checked) {
+      celebrate(cb);
+      if (!who) toast("Tap your name up top so we know who did it");
+      else setTimeout(() => toast(["One step closer to bringing them home.", "Nice work. They're worth it.", "Another step for our family.", "Look at us go!"][Math.floor(Math.random() * 4)]), 900);
+    }
     save(t.id, { done: cb.checked }, true);
   });
   return li;
