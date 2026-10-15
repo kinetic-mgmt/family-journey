@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Our Journey">
+<meta name="theme-color" content="#0f3b4c">
+<title>Our Journey</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f3b4c'/%3E%3Cpath d='M32 50s-15-9-15-20a8 8 0 0 1 15-4 8 8 0 0 1 15 4c0 11-15 20-15 20z' fill='%23ff8a65'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230f3b4c'/%3E%3Cpath d='M32 50s-15-9-15-20a8 8 0 0 1 15-4 8 8 0 0 1 15 4c0 11-15 20-15 20z' fill='%23ff8a65'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+/* Lake Erie sunrise: deep lake teal, sunrise coral, beach sand. One column, stages as stops on a shoreline path. */
+:root {
+  --lake: #0f3b4c; --lake-2: #1d5a6e; --sun: #ff8a65; --sun-2: #ffb38a; --sand: #fbf6ee; --card: #ffffff;
+  --ink: #1d2a30; --muted: #5f6f76; --line: #e8e1d5; --ok: #2e8b62; --craig: #2f6db5; --mason: #8a4fbf; --together: #d0612f;
+  --display: "Young Serif", Georgia, serif; --body: "Figtree", system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root {
+  --sand: #0e171b; --card: #16232a; --ink: #eef2f1; --muted: #9fb0b6; --line: #24343c; --lake-2: #2b7690;
+  --ok: #5fcf9a; --craig: #7fb0ee; --mason: #c39af0; --together: #ff9e72; color-scheme: dark } }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--sand); color: var(--ink); font: 16px/1.5 var(--body); -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 620px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+button { font: inherit; }
+
+/* Header */
+header.hero { background: linear-gradient(180deg, var(--lake) 0%, var(--lake-2) 100%); color: #fff; padding-top: calc(env(safe-area-inset-top) + 18px); padding-bottom: 26px; position: relative; overflow: hidden; }
+.hero .sun { position: absolute; right: -40px; top: -40px; width: 170px; height: 170px; border-radius: 50%; background: radial-gradient(circle, var(--sun-2), var(--sun) 60%, transparent 61%); opacity: .9; }
+.hero .waves { position: absolute; left: 0; right: 0; bottom: -1px; height: 22px; background: var(--sand);
+  -webkit-mask: radial-gradient(14px 10px at 14px 0, transparent 98%, #000) 0 0/28px 22px repeat-x; mask: radial-gradient(14px 10px at 14px 0, transparent 98%, #000) 0 0/28px 22px repeat-x; }
+.hero .top { display: flex; justify-content: space-between; align-items: center; gap: 10px; position: relative; }
+.eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; opacity: .85; font-weight: 700; }
+.hero h1 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 8vw, 40px); line-height: 1.05; margin: 10px 0 6px; position: relative; text-wrap: balance; }
+.hero p { margin: 0; opacity: .9; position: relative; max-width: 30ch; }
+.who { display: inline-flex; background: rgba(255,255,255,.14); border-radius: 999px; padding: 3px; }
+.who button { border: 0; background: transparent; color: #fff; padding: 6px 12px; border-radius: 999px; font-weight: 700; font-size: 14px; cursor: pointer; }
+.who button[aria-pressed="true"] { background: #fff; color: var(--lake); }
+
+/* Progress */
+.progress { margin-top: -6px; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px; display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; position: relative; }
+.ring { width: 74px; height: 74px; }
+.ring circle { fill: none; stroke-width: 9; }
+.ring .bg { stroke: var(--line); } .ring .fg { stroke: var(--sun); stroke-linecap: round; transition: stroke-dashoffset .6s ease; transform: rotate(-90deg); transform-origin: 50% 50%; }
+.ring text { font: 800 17px var(--body); fill: var(--ink); }
+.progress h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 20px; }
+.progress .sub { color: var(--muted); font-size: 14px; }
+.next { margin-top: 6px; font-size: 14px; } .next b { color: var(--together); }
+
+/* Filters */
+.chips { display: flex; gap: 8px; overflow-x: auto; padding: 14px 0 4px; scrollbar-width: none; }
+.chips button { flex: none; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); padding: 7px 14px; border-radius: 999px; font-weight: 700; font-size: 14px; cursor: pointer; }
+.chips button[aria-pressed="true"] { background: var(--ink); color: var(--sand); border-color: var(--ink); }
+
+/* Stages as stops on a path */
+.path { position: relative; padding: 8px 0 30px; }
+.path::before { content: ""; position: absolute; left: 19px; top: 24px; bottom: 40px; border-left: 3px dashed var(--line); }
+.stage { position: relative; padding-left: 50px; margin-top: 14px; }
+.stop { position: absolute; left: 4px; top: 10px; width: 33px; height: 33px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 14px; background: var(--card); border: 3px solid var(--line); color: var(--muted); }
+.stage.done .stop { background: var(--ok); border-color: var(--ok); color: #fff; }
+.stage.current .stop { border-color: var(--sun); color: var(--together); box-shadow: 0 0 0 5px color-mix(in srgb, var(--sun) 22%, transparent); }
+.stage > summary { list-style: none; cursor: pointer; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.stage > summary::-webkit-details-marker { display: none; }
+.stage[open] > summary { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.stage h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 19px; line-height: 1.2; }
+.count { font-size: 13px; color: var(--muted); font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.mini { height: 6px; border-radius: 4px; background: var(--line); margin-top: 6px; overflow: hidden; width: 120px; } .mini i { display: block; height: 100%; background: var(--ok); }
+.tasks { list-style: none; margin: 0; padding: 0; background: var(--card); border: 1px solid var(--line); border-top: 0; border-radius: 0 0 16px 16px; }
+.task { padding: 12px 14px; border-top: 1px solid var(--line); display: grid; gap: 6px; }
+.task:first-child { border-top: 0; }
+.row { display: grid; grid-template-columns: 30px 1fr; gap: 10px; align-items: start; }
+.check { appearance: none; -webkit-appearance: none; width: 28px; height: 28px; border-radius: 9px; border: 2.5px solid var(--line); background: var(--sand); cursor: pointer; display: grid; place-items: center; margin: 0; transition: transform .15s; }
+.check:checked { background: var(--ok); border-color: var(--ok); }
+.check:checked::after { content: ""; width: 7px; height: 13px; border: solid #fff; border-width: 0 3px 3px 0; transform: rotate(45deg) translate(-1px,-1px); }
+.check:active { transform: scale(.9); }
+.check:focus-visible, textarea:focus-visible, .chips button:focus-visible, .who button:focus-visible, summary:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; }
+.title { font-weight: 700; line-height: 1.3; }
+.task.done .title { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: color-mix(in srgb, var(--ok) 60%, transparent); }
+.detail { color: var(--muted); font-size: 14px; margin-top: 2px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 6px; }
+.tag { font-size: 12px; font-weight: 800; padding: 2px 9px; border-radius: 999px; color: #fff; }
+.tag.Craig { background: var(--craig); } .tag.Mason { background: var(--mason); } .tag.Together { background: var(--together); }
+.phone { font-size: 13px; font-weight: 800; color: var(--lake-2); text-decoration: none; border: 1.5px solid currentColor; border-radius: 999px; padding: 1px 9px; }
+@media (prefers-color-scheme: dark) { .phone { color: #7fd0e6; } }
+.by { font-size: 12px; color: var(--ok); font-weight: 700; }
+textarea { margin-left: 40px; width: calc(100% - 40px); min-height: 44px; resize: vertical; font: 15px/1.4 var(--body); color: var(--ink); background: var(--sand); border: 1.5px solid var(--line); border-radius: 12px; padding: 9px 11px; }
+textarea::placeholder { color: var(--muted); }
+.empty { color: var(--muted); padding: 12px 14px; font-size: 14px; }
+
+/* Lock screen */
+.lock { min-height: 100vh; display: grid; place-items: center; background: linear-gradient(180deg, var(--lake), var(--lake-2)); color: #fff; padding: 24px; }
+.lock form { width: min(380px, 100%); display: grid; gap: 12px; text-align: center; }
+.lock h1 { font-family: var(--display); font-weight: 400; font-size: 34px; margin: 0; }
+.lock input { font: 18px var(--body); padding: 14px 16px; border-radius: 14px; border: 0; text-align: center; }
+.lock button { font: 800 17px var(--body); padding: 14px; border-radius: 14px; border: 0; background: var(--sun); color: var(--lake); cursor: pointer; }
+.lock .err { min-height: 22px; color: #ffd2c2; font-weight: 700; }
+.toast { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom) + 18px); transform: translateX(-50%) translateY(120px); background: var(--ink); color: var(--sand); padding: 10px 16px; border-radius: 999px; font-weight: 700; font-size: 14px; transition: transform .3s; z-index: 10; white-space: nowrap; }
+.toast.show { transform: translateX(-50%) translateY(0); }
+footer { color: var(--muted); font-size: 13px; text-align: center; padding: 10px 0 calc(env(safe-area-inset-bottom) + 30px); }
+footer button { border: 0; background: none; color: var(--muted); text-decoration: underline; cursor: pointer; font-size: 13px; }
+canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 20; }
+[hidden] { display: none !important; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="lock" id="lock" hidden>
+  <form id="lockForm" autocomplete="off">
+    <div class="eyebrow">Rogers Family</div>
+    <h1>Our Journey</h1>
+    <p>Enter our family passcode.</p>
+    <input id="code" type="password" placeholder="Passcode" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Family passcode">
+    <button type="submit" id="unlock">Open</button>
+    <div class="err" id="err" role="alert"></div>
+  </form>
+</div>
+
+<div id="app" hidden>
+  <header class="hero">
+    <div class="sun" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="top">
+        <div class="eyebrow">Rogers Family</div>
+        <div class="who" role="group" aria-label="Who is using this">
+          <button type="button" data-who="Craig" aria-pressed="false">Craig</button>
+          <button type="button" data-who="Mason" aria-pressed="false">Mason</button>
+        </div>
+      </div>
+      <h1 id="greet">Our adoption journey</h1>
+      <p>One kid a little older than Sutton, and a home full of people who love them.</p>
+    </div>
+    <div class="waves" aria-hidden="true"></div>
+  </header>
+
+  <main class="wrap">
+    <section class="progress" aria-live="polite">
+      <svg class="ring" viewBox="0 0 80 80" aria-hidden="true">
+        <circle class="bg" cx="40" cy="40" r="32"></circle>
+        <circle class="fg" id="ringFg" cx="40" cy="40" r="32" stroke-dasharray="201.06" stroke-dashoffset="201.06"></circle>
+        <text x="40" y="46" text-anchor="middle" id="ringText">0%</text>
+      </svg>
+      <div>
+        <h2 id="doneLine">Getting started</h2>
+        <div class="sub" id="subLine"></div>
+        <div class="next" id="nextLine"></div>
+      </div>
+    </section>
+
+    <nav class="chips" aria-label="Show tasks for">
+      <button type="button" data-f="all" aria-pressed="true">Everything</button>
+      <button type="button" data-f="mine" aria-pressed="false">Just mine</button>
+      <button type="button" data-f="Craig" aria-pressed="false">Craig</button>
+      <button type="button" data-f="Mason" aria-pressed="false">Mason</button>
+      <button type="button" data-f="Together" aria-pressed="false">Together</button>
+      <button type="button" data-f="open" aria-pressed="false">Not done yet</button>
+    </nav>
+
+    <div class="path" id="path"></div>
+  </main>
+
+  <footer class="wrap">
+    Saves automatically for both of us. <button type="button" id="lockBtn">Lock this phone</button>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+const API = "https://fegzfjftfgqjjgatihyi.supabase.co/rest/v1/rpc/";
+const KEY = "sb_publishable_6lRpjNtJ--rmWurJgjJslg_B84jvx2-";
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch {} },
+  del(k) { try { localStorage.removeItem(k); } catch {} }
+};
+let code = store.get("journey-code");
+let who = store.get("journey-who") || "";
+let filter = store.get("journey-filter") || "all";
+let tasks = [];
+const open = new Set();
+const saving = {};
+
+async function rpc(fn, body) {
+  const r = await fetch(API + fn, { method: "POST", headers: { apikey: KEY, "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  const data = await r.json().catch(() => null);
+  if (!r.ok) { const e = new Error((data && data.message) || "Something went wrong"); e.status = r.status; e.code = data && data.code; throw e; }
+  return data;
+}
+
+function toast(msg) { const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 1800); }
+
+// Lock screen
+document.getElementById("lockForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const c = document.getElementById("code").value.trim().toLowerCase();
+  const btn = document.getElementById("unlock"), err = document.getElementById("err");
+  if (!c) return;
+  btn.disabled = true; btn.textContent = "Checking"; err.textContent = "";
+  try { tasks = await rpc("adoption_list", { p_code: c }); code = c; store.set("journey-code", c); showApp(); }
+  catch (x) { err.textContent = x.code === "28000" ? "That passcode didn't work. Try again." : "Couldn't connect. Check your internet."; }
+  finally { btn.disabled = false; btn.textContent = "Open"; }
+});
+document.getElementById("lockBtn").addEventListener("click", () => { store.del("journey-code"); location.reload(); });
+
+function showLock() { document.getElementById("lock").hidden = false; document.getElementById("app").hidden = true; setTimeout(() => document.getElementById("code").focus(), 50); }
+function showApp() { document.getElementById("lock").hidden = true; document.getElementById("app").hidden = false; render(); }
+
+// Who + filters
+document.querySelectorAll(".who button").forEach(b => b.addEventListener("click", () => { who = b.dataset.who; store.set("journey-who", who); render(); }));
+document.querySelectorAll(".chips button").forEach(b => b.addEventListener("click", () => { filter = b.dataset.f; store.set("journey-filter", filter); render(); }));
+
+function visible(t) {
+  if (filter === "all") return true;
+  if (filter === "open") return !t.done;
+  if (filter === "mine") return !who || t.owner === who || t.owner === "Together";
+  return t.owner === filter;
+}
+
+function render() {
+  document.querySelectorAll(".who button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.who === who)));
+  document.querySelectorAll(".chips button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.f === filter)));
+  document.getElementById("greet").textContent = who ? `Hi ${who}, here's where we are` : "Our adoption journey";
+
+  const total = tasks.length, done = tasks.filter(t => t.done).length, pct = total ? Math.round(100 * done / total) : 0;
+  document.getElementById("ringFg").style.strokeDashoffset = String(201.06 * (1 - pct / 100));
+  document.getElementById("ringText").textContent = pct + "%";
+  const stages = [...new Map(tasks.map(t => [t.stage, t.stage_title])).entries()];
+  const current = stages.find(([s]) => tasks.some(t => t.stage === s && !t.done));
+  document.getElementById("doneLine").textContent = current ? `Stop ${current[0]}: ${current[1]}` : "Every step done!";
+  document.getElementById("subLine").textContent = `${done} of ${total} steps done`;
+  const mineNext = tasks.find(t => !t.done && (!who || t.owner === who || t.owner === "Together"));
+  document.getElementById("nextLine").innerHTML = "";
+  if (mineNext) { const b = document.createElement("b"); b.textContent = "Up next: "; document.getElementById("nextLine").append(b, mineNext.title); }
+
+  const path = document.getElementById("path");
+  const focused = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.id : null;
+  if (focused) return; // don't rebuild while someone is typing
+  path.innerHTML = "";
+  for (const [s, title] of stages) {
+    const all = tasks.filter(t => t.stage === s), shown = all.filter(visible);
+    const sd = all.filter(t => t.done).length;
+    const d = document.createElement("details");
+    d.className = "stage" + (sd === all.length ? " done" : "") + (current && current[0] === s ? " current" : "");
+    if (open.has(s) || (!open.size && current && current[0] === s) || filter !== "all") d.open = true;
+    d.addEventListener("toggle", () => { d.open ? open.add(s) : open.delete(s); });
+    d.innerHTML = `<div class="stop" aria-hidden="true"></div><summary><div><h3></h3><div class="mini"><i></i></div></div><span class="count"></span></summary><ul class="tasks"></ul>`;
+    d.querySelector(".stop").textContent = sd === all.length ? "✓" : s;
+    d.querySelector("h3").textContent = title;
+    d.querySelector(".mini i").style.width = (100 * sd / all.length) + "%";
+    d.querySelector(".count").textContent = `${sd}/${all.length}`;
+    const ul = d.querySelector("ul");
+    if (!shown.length) { const li = document.createElement("li"); li.className = "empty"; li.textContent = "Nothing here for this filter."; ul.append(li); }
+    for (const t of shown) ul.append(taskEl(t));
+    path.append(d);
+  }
+}
+
+function taskEl(t) {
+  const li = document.createElement("li");
+  li.className = "task" + (t.done ? " done" : "");
+  li.innerHTML = `<div class="row"><input type="checkbox" class="check" aria-label="Mark done"><div><div class="title"></div><div class="detail"></div><div class="meta"><span class="tag"></span></div></div></div><textarea rows="1" placeholder="Notes or answers"></textarea>`;
+  const cb = li.querySelector(".check"); cb.checked = t.done; cb.id = "cb-" + t.id;
+  li.querySelector(".title").textContent = t.title;
+  const det = li.querySelector(".detail"); det.textContent = t.detail; det.hidden = !t.detail;
+  const tag = li.querySelector(".tag"); tag.textContent = t.owner; tag.classList.add(t.owner);
+  const meta = li.querySelector(".meta");
+  if (t.phone) { const a = document.createElement("a"); a.className = "phone"; a.href = "tel:" + t.phone.replace(/\D/g, ""); a.textContent = "Call " + t.phone; meta.append(a); }
+  if (t.done && t.done_by) { const by = document.createElement("span"); by.className = "by"; by.textContent = "Done by " + t.done_by; meta.append(by); }
+  const ta = li.querySelector("textarea"); ta.value = t.note || ""; ta.id = "note-" + t.id; ta.dataset.id = t.id;
+  const grow = () => { ta.style.height = "auto"; ta.style.height = Math.max(44, ta.scrollHeight) + "px"; };
+  requestAnimationFrame(grow);
+  let timer;
+  ta.addEventListener("input", () => { grow(); clearTimeout(timer); timer = setTimeout(() => save(t.id, { note: ta.value }), 800); });
+  ta.addEventListener("blur", () => { clearTimeout(timer); if (ta.value !== (find(t.id).note || "")) save(t.id, { note: ta.value }); setTimeout(render, 0); });
+  cb.addEventListener("change", e => {
+    if (cb.checked) { if (!who) toast("Tap Craig or Mason up top so we know who did it"); celebrate(cb); }
+    save(t.id, { done: cb.checked }, true);
+  });
+  return li;
+}
+
+const find = id => tasks.find(t => t.id === id);
+
+async function save(id, patch, rerender) {
+  const t = find(id); if (!t) return;
+  Object.assign(t, patch);
+  if (patch.done !== undefined) t.done_by = patch.done ? (who || "") : null;
+  if (rerender) render();
+  if (saving[id]) { saving[id].again = true; return; }
+  saving[id] = { again: false };
+  try {
+    do {
+      saving[id].again = false;
+      const cur = find(id);
+      const r = await rpc("adoption_update", { p_code: code, p_id: id, p_done: cur.done, p_note: cur.note || "", p_by: who || "" });
+      if (r && r.id) { const i = tasks.findIndex(x => x.id === id); if (!saving[id].again) tasks[i] = { ...r, note: tasks[i].note }; }
+    } while (saving[id].again);
+    toast("Saved");
+  } catch (x) {
+    if (x.code === "28000") { store.del("journey-code"); showLock(); }
+    else toast("Not saved. Check your internet.");
+  } finally { delete saving[id]; }
+}
+
+async function refresh() {
+  if (!code || document.hidden || Object.keys(saving).length) return;
+  try { const fresh = await rpc("adoption_list", { p_code: code }); tasks = fresh; render(); }
+  catch (x) { if (x.code === "28000") { store.del("journey-code"); showLock(); } }
+}
+document.addEventListener("visibilitychange", () => { if (!document.hidden) refresh(); });
+setInterval(refresh, 30000);
+
+// Confetti
+function celebrate(el) {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const c = document.getElementById("confetti"), ctx = c.getContext("2d");
+  c.width = innerWidth * devicePixelRatio; c.height = innerHeight * devicePixelRatio; ctx.scale(devicePixelRatio, devicePixelRatio);
+  const r = el.getBoundingClientRect(), colors = ["#ff8a65", "#ffb38a", "#2e8b62", "#2f6db5", "#8a4fbf", "#ffd166"];
+  const bits = Array.from({ length: 60 }, () => ({ x: r.left + 14, y: r.top + 14, vx: (Math.random() - .5) * 9, vy: -Math.random() * 10 - 3, s: 4 + Math.random() * 5, c: colors[Math.floor(Math.random() * colors.length)], a: Math.random() * 6 }));
+  let f = 0;
+  (function tick() {
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    for (const b of bits) { b.vy += .35; b.x += b.vx; b.y += b.vy; b.a += .2; ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(b.a); ctx.fillStyle = b.c; ctx.fillRect(-b.s / 2, -b.s / 4, b.s, b.s / 2); ctx.restore(); }
+    if (++f < 70) requestAnimationFrame(tick); else ctx.clearRect(0, 0, innerWidth, innerHeight);
+  })();
+}
+
+// Start
+if (code) {
+  document.getElementById("app").hidden = false;
+  rpc("adoption_list", { p_code: code }).then(d => { tasks = d; showApp(); }).catch(() => { store.del("journey-code"); showLock(); });
+} else showLock();
+</script>
+</body>
+</html>
